@@ -46,7 +46,7 @@ function _calculate_income_tax(income, percent, high, low) {
     return _calculate_general_tax(_calculate_taxable_income(income, high, low), percent);
 }
 
-let valid_inputs = [false, false, false, false];
+let valid_inputs = [false, false, false];
 let income_inp = 0;
 let percentage_inp = 0;
 let selected_mode = -1;
@@ -177,6 +177,8 @@ function solver() {
 }
 
 function validate_inputs() {
+    const solver_button = document.querySelector("button[name='solve_btn']");
+    
     for (var i = 0; i < valid_inputs.length; i++) {
         if (!valid_inputs[i]) {
             solver_button.classList.remove("hidden");
@@ -197,32 +199,42 @@ function init_calculator() {
     const percentage_input = document.querySelector("input[name='percentage_inp']");
     const mode_input = document.querySelector("input[name='mode_inp']");
     const system_input = document.querySelector("input[name='system_inp']");
-    const solver_button = document.querySelector("button[name='solve_btn']")
+    const solver_button = document.querySelector("button[name='solve_btn']");
 
     income_input.addEventListener("input", (event) => {
         income_inp = parseInt(event.target.value);
         if (!(0 < income_input && income_input < MAX_INCOME)) valid_inputs[0] = false;
         else valid_inputs[0] = true;
+        validate_inputs();
     });
 
     percentage_input.addEventListener("input", (event) => {
         percentage_inp = parseInt(event.target.value);
-        if (!(0 < percentage_inp && percentage_inp < 100)) valid_inputs[1] = false;
-        else valid_inputs[1] = true;
+        if (!(0 <= selected_mode && selected_mode < modes.length)) {
+            valid_inputs[1] = false;
+            valid_inputs[2] = false;
+        }
+        else { 
+            valid_inputs[1] = true;
+            valid_inputs[2] = true;
+        }
+        validate_inputs();
     });
 
     mode_input.addEventListener("input", (event) => {
         selected_mode = parseInt(event.target.value) - 1;
-        if (!(0 <= selected_mode && selected_mode < modes.length)) valid_inputs[2] = false;
-        else valid_inputs[2] = true;
+        if (!(0 <= selected_mode && selected_mode < modes.length)) valid_inputs[1] = false;
+        else valid_inputs[1] = true;
         mode_controller();
+        validate_inputs();
     });
 
     system_input.addEventListener("input", (event) => {
         selected_system = parseInt(event.target.value) - 1;
-        if (!(0 <= selected_system && selected_system < systems.length)) valid_inputs[3] = false;
-        else valid_inputs[3] = true;
+        if (!(0 <= selected_system && selected_system < systems.length)) valid_inputs[2] = false;
+        else valid_inputs[2] = true;
         update_bracket_table();
+        validate_inputs();
     });
 
     solver_button.addEventListener("click", () => {
