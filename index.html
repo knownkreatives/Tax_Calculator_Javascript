@@ -11,34 +11,60 @@
 
 <body>
     <div class="app-container" id="main">
-        <div class="" id="income_input">
-            <p>Enter your income: </p><input name="income_inp" type="number" placeholder="..."/>
+        <div class="income-input" id="income_input">
+            <p style="display: inline; margin-right: 10px;">Enter your income: </p><input name="income_inp" type="number" placeholder="..." style="display: inline;"/>
         </div>
+        <br />
 
-        <div class="hidden" id="calculator_modes">
-            <p>Select a calculator mode: </p>
-            <ul class="" id="mode_list"></ul>
+        <div class="selector" id="calculator_modes">
+            <p style="display: inline; margin-right: 10px;">Select a calculator mode: </p><input name="mode_inp" type="number" placeholder="..."/>
+            <ol class="option_list" id="mode_list"></ol>
+        </div>
+        <br />
+              
+        <div class="mode hidden" id="general_mode">
+            <p style="display: inline; margin-right: 10px;">Enter percentage: </p><input name="percentage_inp" type="number" placeholder="..." />
+            <p id="general_output"></p>
         </div>
         
-        <div class="hidden" id="system_selector">
-            <p>Select between the following: </p><input name="system_inp" type="number" placeholder="..."/>
-            <ol class="" id="system_list"> </ol>
-        </div>
-        
-        <div class="hidden" id="general_mode">
+        <div class="mode hidden" id="income_mode">
+            <div class="selector" id="system_selector">
+                <p style="display: inline; margin-right: 10px;">Select between the following: </p><input name="system_inp" type="number" placeholder="..."/>
+                <ol class="option_list" id="system_list"></ol>
+            </div>
 
-        </div>
-        <div class="hidden" id="">
-            <div class="hidden" id="bracket_selector">
-                <p>Select between the following: </p><input name="system_inp" type="number" placeholder="..."/>
-                <ol class="" id="system_list"></ol>
+            <div class="" id="income_brakdown">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Bracket</th>
+                            <th>Taxable Income</th>
+                            <th>Tax Rate</th>
+                            <th>Tax Owed</th>
+                        </tr>
+                    </thead>
+                    <tbody id="income_breakdown_table_body"></tbody>
+                </table>
+            </div>
+            <br />
+            <div class="" id="takehome_breakdown">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Time Period</th>
+                            <th>Gross Income</th>
+                            <th>Total Tax Owed</th>
+                            <th>Net Income</th>
+                        </tr>
+                    </thead>
+                    <tbody id="takehome_breakdown_table_body"></tbody>
+                </table>
             </div>
         </div>
+        <button type="button" id="solve_button" name="solve_btn" class="hidden"><p>Solve</p></button>
         <script src="script.js"></script>
     </div>
 </body>
 
-<footer>
-
-</footer>
+<footer></footer>
 </html>
